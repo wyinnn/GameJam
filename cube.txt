@@ -1,0 +1,34 @@
+local onland=false
+local tt={-1,0,1}
+function start()
+script.parent.Name='Cube'..tostring(I.Value)
+
+end
+
+-- run per frame
+function tick(delta)
+
+end
+
+
+
+function onCollisionEvent(a,b,c)
+if(c.Name=='Cube'..tostring(I.Value)or b.Name=='Cube'..tostring(I.Value))then
+if(onland==false)then
+I.Value=I.Value+1
+d=script:createInstance('Archetype_Cube','Cube'..tostring(I.Value),World,script.parent.Position+Vector3(40*tt[math.random(3)],0,40*tt[math.random(3)]),EulerDegree(0))
+onland=true
+end
+end
+
+
+end
+
+function onCollisionEventLeave(a,b,c)
+temp=c
+if(c.Name=='PlayerController')then
+temp=b
+end
+print(temp)
+script:deleteObject(temp.parent)
+end
